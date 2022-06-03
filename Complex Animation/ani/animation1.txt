@@ -1,0 +1,223 @@
+import React ,{useEffect,useRef} from 'react';
+import gsap from 'gsap';
+import {ReactComponent as SvgI} from "./Images/OnlyLeavesOptimized.svg";
+import {ReactComponent as SvgP} from "./Images/PathWithTextOptimized.svg";
+import "./logoStyle.css"
+/**
+ * @param {string} conatinerWidth Cubes 
+ * @returns 
+ * 
+ */
+
+
+function SvgImage() {
+    const el=useRef();
+    const q = gsap.utils.selector(el);
+
+
+    const width="700px";
+    let height;
+    const gridBackgroud="#269";
+    const gridPrimaryLinesColor="black";
+    const gridSecondaryLinesColor="rgba(255,255,255,.3)";
+    // let gridPrimaryLinesWidth;
+    // let gridSecondaryLinesWidth;
+
+
+    const containerWidth={
+        position: "relative",
+        width: "100%",
+        height: "100vh",
+        background: "black",
+        overflow: 'hidden',
+        perspective: "900px",
+        // perspectiveOrigin: "left"
+        // "background-size": "40px 40px",
+    //    ?"background-image": "radial-gradient(circle, #000000 1px, rgba(0, 0, 0, 0) 1px)",
+
+        // "background-color":gridBackgroud,
+        // "background-image": `linear-gradient(${gridPrimaryLinesColor} 1px, transparent 1px),
+        // linear-gradient(90deg, ${gridPrimaryLinesColor} 1px, transparent 1px),
+        // linear-gradient(${gridSecondaryLinesColor} 1px, transparent 1px),
+        // linear-gradient(90deg,${gridSecondaryLinesColor} 1px, transparent 1px)`,
+        // "background-size": "50px 50px, 50px 50px, 10px 10px, 10px 10px",
+        // "background-position":"-1px -1px, -1px -1px, -1px -1px, -1px -1px",
+
+
+        // lessStrainONeyes
+
+        // "background-color":"#269",
+        // "background-image": `linear-gradient(${gridPrimaryLinesColor} 2px, transparent 2px),
+        // linear-gradient(90deg, ${gridPrimaryLinesColor} 2px, transparent 2px),
+        // linear-gradient(${gridSecondaryLinesColor} 1px, transparent 1px),
+        // linear-gradient(90deg,${gridSecondaryLinesColor} 1px, transparent 1px)`,
+        // "background-size": "50px 50px, 50px 50px, 10px 10px, 10px 10px",
+        // "background-position":"-2px -2px, -2px -2px, -1px -1px, -1px -1px",
+
+    }
+    const containerBox={
+      position: "absolute",
+      width: "100%",
+      height: "100%",
+      top:"50%",
+      right: "50%",
+      transform:"translate(60%,-60%) rotateY(46deg)",
+      transformStyle: "preserve-3d",                                                        
+
+    }
+
+    const transformBox={
+        position: "absolute",
+        width: "800%",
+        height: "6000px",
+        top:"50%",
+        right: "50%",
+        transform:`translate(45%,-50%)
+
+        `,                                                                             
+        backgroundColor:gridBackgroud,
+        backgroundImage: `linear-gradient(${gridPrimaryLinesColor} 1px, transparent 1px),
+        linear-gradient(90deg, ${gridPrimaryLinesColor} 1px, transparent 1px),
+        linear-gradient(${gridSecondaryLinesColor} 1px, transparent 1px),
+        linear-gradient(90deg,${gridSecondaryLinesColor} 1px, transparent 1px)`,
+        backgroundSize: "50px 50px, 50px 50px, 10px 10px, 10px 10px",
+        backgroundPosition:"-1px -1px, -1px -1px, -1px -1px, -1px -1px",
+    }
+
+    const imageBox={
+        position: 'absolute',
+        width: "1000px",
+        // background: "red",
+        top: "50%",
+        right: "50%",
+        transform: 'translate(50%,-50%)',
+        
+    }
+
+    const pathStyle={
+        position: 'absolute',
+        width: "100%",
+        height: "100%",
+        top: "0px",
+        right: "0px",
+        zIndex: "-1"
+
+    }
+    const leavesStyle={
+        
+        width: "100%",
+        height: "auto",
+       
+
+        
+
+    }
+
+
+    useEffect(() => {
+              const eFullLogo=el.current;
+              const eContainerBox=q(".containerBox")[0]; 
+              const eTranformBox=q(".transformBox")[0];
+                //animation done on this
+              const eImageBox=q(".imageBox")[0];
+              const ePathStyle=q(".pathStyle")[0];
+              const eLeavesStyle=q(".leavesStyle")[0];
+              const eLeafBox=q("#leafBox")[0];
+              const eStrokePath=q("#strokePath")[0];
+              const eText=q("#text")[0];
+              const eBackgroundLines=q("#layer1")[0];
+
+              console.log(eFullLogo,eTranformBox,eImageBox,ePathStyle,eLeavesStyle,eLeafBox,
+                eStrokePath,eText,eBackgroundLines
+                );
+              // const leavesStyle=q(".leavesStyle")[0];
+              gsap.set(eStrokePath,{
+                attr:{
+                  pathLength:1,
+                  "stroke-dasharray":1,
+                  "stroke-dashoffset":1,
+                }
+              })
+
+                const t1=gsap.timeline();
+                const t2=gsap.timeline();
+                const strokeBuild=gsap.timeline().to(eStrokePath,{
+                  attr:{
+                    "stroke-dashoffset":0,
+                  },
+                  ease:"SlowMo.ease.config(0.7,0.7,false)",
+                  duration:8
+                })
+
+                const easeInside=gsap.timeline();
+                easeInside.from(eTranformBox,{
+                  transform: "translate(70%,-50%)",
+                  duration:3,
+                  ease:"Power4.easeOut",
+                })
+
+                const perspectiveChange=gsap.timeline().to(eFullLogo,{
+                  perspective: "5200px",
+                  perspectiveOrigin:"center",
+                  duration:20
+
+                });
+
+                const rotateToNormal=gsap.timeline().to(eContainerBox,{
+                  transform:"translate(50%,-50%) rotate(0deg)",
+                  // paused:true,
+                    
+
+                }).pause();
+                
+
+
+                // gsap.to(eFullLogo,{
+                //   perspective : 2000,
+                //   duration:8,
+                // })
+
+                // t1.from(eTranformBox,{
+                //   transform: "translate(70%,-50%)",
+                //   duration:3,
+                //   ease:"Power4.easeOut",
+                // })
+                // t1.to(eContainerBox,{
+                //   transform:"translate(30%,-60%) rotateY(40deg)",
+                //   duration:2
+
+                // },"=-3")
+                // t1.to(eContainerBox,{
+                //   transform:"translate(50%,-50%)  rotateY(0deg)",
+                //   duration:2
+
+                // },"=-1")
+
+
+
+    //   first;
+    
+      return () => {
+        // second;
+      };
+    }, []);
+    
+
+
+
+  return <div className="fullLogo" ref={el} style={containerWidth}>
+    <div className='containerBox' style={containerBox}>
+      <div className='transformBox' style={transformBox}>
+        
+        <div className='imageBox' style={imageBox}>
+        
+      <SvgP className='pathStyle'  style={pathStyle}>  </SvgP>
+
+    <SvgI className='leavesStyle'  style={leavesStyle}></SvgI>
+    </div>
+    </div>
+    </div>
+  </div>;
+}
+
+export default SvgImage;
